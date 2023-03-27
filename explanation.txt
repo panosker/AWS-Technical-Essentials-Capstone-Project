@@ -1,0 +1,18 @@
+The client sends a request to the domain name associated with the web application.
+The request is resolved to the IP address of the Elastic Load Balancer (ELB) through a DNS query to the Amazon Route 53 DNS service.
+The Internet Gateway (IGW) enables communication between the client and the ELB by providing internet connectivity to the ELB and the Amazon EC2 instances running the web application.
+After the ELB receives the request from the client, it distributes the request to one of the Amazon EC2 instances running the web application.
+The EC2 instance processes the request by querying the Amazon RDS database for data.
+The EC2 instance then sends the response back to the ELB.
+The ELB sends the response back to the client via the IGW.
+
+
+Amazon VPC was chosen to create a logically isolated virtual network to ensure that the web application and database are not exposed to the public internet. 
+
+IGW plays a critical role in providing internet connectivity to the web application and enabling communication between the web application and the clients on the internet.
+
+Amazon ELB was chosen to distribute incoming traffic across multiple Amazon EC2 instances running the web application to ensure high availability and scalability.
+
+Amazon EC2 instances were chosen to run the web application because they provide scalable compute capacity. The web application is launched in an Auto Scaling group, which automatically adds or removes instances based on demand, to ensure that the web application can handle fluctuations in traffic without downtime.
+
+Amazon RDS was chosen to create a highly available MySQL database. Multi-AZ deployment was used to provide high availability and durability. Amazon RDS provides automated backups, software patching, and monitoring.
